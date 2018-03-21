@@ -1,0 +1,25 @@
+#edit .edit-title {
+	padding : 10px 0;
+	text-align: center;
+	font-size: 28px;
+}
+#edit input {
+	border : none;
+}
+#edit .question-title {
+	width: 80%;
+}
+#edit .text-question {
+	position: relative;
+}
+#edit .text-question textarea {
+	max-width: 80%;
+}
+#edit .text-question .is-required {
+	position: absolute;
+	right: 20%;
+	top : -24px;
+}
+#edit .text-question .is-required label {
+	margin-left: 5px;
+}
