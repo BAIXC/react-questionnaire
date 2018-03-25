@@ -12,7 +12,7 @@ const QuestionItem = (args) => {
 	null;
 	const questionBody = (question.type === 'textarea') ? (
 			<div className = 'fill-text-question'>
-				<textarea rows = '5' cols = '100'
+				<textarea
 				  		value = {question.text}
 				  		onChange = {(e)=>editTextarea(questionId,e.target.value)}/>
 			</div>

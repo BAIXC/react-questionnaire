@@ -11,6 +11,7 @@ import { view as Edit } from '../Edit/';
 import { view as CheckData } from '../CheckData/';
 import { view as Fill } from '../Fill/';
 import Main from '../Main/Main.js';
+import './reset.css';
 
 const App = () => (
   <Provider store = { store }>

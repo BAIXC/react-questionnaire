@@ -1,19 +1,25 @@
-#fill .edit-title {
+#fill .fill-title {
 	padding : 10px 0;
 	text-align: center;
 	font-size: 28px;
 }
-#fill h3 {
-	font-size: 30px;
-	text-indent: 20px;
+#fill section {
+	margin: 0 0 20px 10%;
 }
-#fill li {
-	list-style: none;
-	padding: 5px;
+#fill .ant-radio-group,
+#fill .ant-checkbox-group {
+	margin-left: 5%;
 }
-#fill input {
-	list-style: none;
-	margin-right: 20px;
+#fill .ant-radio-wrapper,
+#fill .ant-checkbox-wrapper {
+	display: block;
+	padding: 10px 0;
+	margin: 0;
+}
+#fill textarea {
+	margin-left: 5%;
+	width: 80%;
+	height : 150px;
 }
 #fill .fill-is-required {
 	margin-right: 5px;
@@ -21,4 +27,9 @@
 	color : red;
 	display: inline-block;
 	vertical-align: middle;
+}
+
+#fill footer a:hover {
+	text-decoration: none;
+	font-weight: 800;
 }

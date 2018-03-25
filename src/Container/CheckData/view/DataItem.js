@@ -13,6 +13,9 @@ class DataItem extends React.Component {
 		let myChart = `myChart${chartIndex}`;
 		myChart = echarts.init(ReactDOM.findDOMNode(this.refs[`chart${chartIndex}`]));
 		myChart.setOption(chartData);
+		window.addEventListener("resize", function () { 
+          myChart.resize(); 
+     });
 	}
 	render(){
 		//每个问题对应的索引

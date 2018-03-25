@@ -1,9 +1,27 @@
-.single-chart {
+#checkData .checkData-noData {
+	text-align: center;
+	padding: 50px 0;
+	font-size: 30px;
+	color: #aaa;
+}
+#checkData .single-chart {
 	height: 300px;
 	margin: 20px 0;
 	padding: 10px;
 	border: 1px solid #ddd;
 }
-.checkData-back-bottom {
-	width: 50px;
+#checkData .checkData-back {
+	width: 100px;
+	padding: 10px 15px;
+	border-radius: 5px;
+	font-size: 16px;
+	color : #fff;
+	background-color: #C23531;
+}
+#checkData .checkData-back:hover {
+	color : #fff;
+	text-decoration: none;
+}
+footer {
+	text-align: center;
 }

@@ -3,7 +3,7 @@ import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import QuestionList from './QuestionList';
 import { actions as questionActions } from '../../reducer/questions';
-import { Modal } from 'antd';
+import { Modal, Button } from 'antd';
 import './fill.css';
 const confirm = Modal.confirm;
 class Fill extends React.Component {
@@ -45,7 +45,8 @@ class Fill extends React.Component {
 	render(){	
 		const {questionsData, questionnaires, location} = this.props;
 		//获取home页传过来的参数(问卷Id)
-		const {questionnaireId} = location.state;
+		// const {questionnaireId} = location.state;
+		const questionnaireId = 'Qnn2';
 		//获取当前问卷的所有数据
 		const questionnaire = questionnaires.byId[questionnaireId];
 		//获取当前问卷的问题数据（保存的是问题的id数组）
@@ -68,12 +69,12 @@ class Fill extends React.Component {
 					>{questionnaire.title}</h3>
 				{questionsDetail}
 				<footer>
-					<button className = "publish"
+					<Button type = 'primary' className = "publish"
 							onClick = {()=>this.submitConfirm(questionsArr)}
-							>提交问卷</button>
-					<button className = "save">
+							>提交问卷</Button>
+					<Button type = 'primary' className = "save">
 						<Link to = '/'>返回列表</Link>
-					</button>
+					</Button>
 				</footer>
 			</div>
 		)

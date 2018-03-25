@@ -4,7 +4,6 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { actions } from '../../reducer/questionnaires';
 import { checkStatusByDeadline } from '../../util/util';
-import 'antd/dist/antd.css';
 import './Home.css';
 const confirm = Modal.confirm;
 class Home extends React.Component {
@@ -193,15 +192,15 @@ class Home extends React.Component {
 				新建问卷
 			</Button>
 		</div> :
-		<div className = "new-qn">
-			<Button type = 'primary'>
+		<div className = "new-Qnn">
+			<Button size = "large" type = 'primary'>
 				<Link to = {{
 							pathname: '/edit',
 							state: { 
 								editType : 'create' }
 							}}  
 				className = "action-link"
-				>新建问卷</Link>
+				>+新建问卷</Link>
 			</Button>
 		</div>
 

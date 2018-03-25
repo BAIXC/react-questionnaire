@@ -6,7 +6,7 @@ const Header = () => (
 	<header className = "Qn-header">
 		<div className = 'logo'>问卷管理</div>
 		<Link 
-			to = "/Home"
+			to = "/"
 			className = 'my-Qn'>我的问卷
 		</Link>
 	</header>

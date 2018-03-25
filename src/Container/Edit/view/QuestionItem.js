@@ -1,5 +1,6 @@
 import React from 'react';
 import OptionList from './OptionList';
+import { Button, Checkbox } from 'antd';
 
 const QuestionItem = (args) => {
 	const { 
@@ -13,9 +14,8 @@ const QuestionItem = (args) => {
 		(<div className = 'text-question'>
 			<textarea rows = '5' cols = '100'/>
 			<div className = 'is-required'>
-				<input 
-				type = "checkbox"
-				onClick = {() => editRequired(questionId)} />
+				<Checkbox
+				onChange = {() => editRequired(questionId)} />
 				<label>是否必填</label>
 			</div>
 		</div>):(
@@ -39,13 +39,13 @@ const QuestionItem = (args) => {
 				/>
 			</h4>
 			{questionBody}
-			<ul className = "question-action">
-				{ index !== 0 ? <li onClick = {() => {moveQuestion(questionnaireId,questionId,'up')}}>上移</li> : null }
-				<li onClick = {() => {deleteQuestion(questionnaireId,questionId)}}>删除</li>
-				<li onClick = {() => {reuseQuestion(questionnaireId,questionId)}}>复用</li>
-				{ index !== (length-1) ? <li onClick = {() => {moveQuestion(questionnaireId,questionId,'down')}}>下移</li> : null }
-			</ul>
-			<button onClick = {() => {addOption(questionId)}}>+新增选项</button>
+			{question.type === 'textarea'? null : <Button onClick = {() => {addOption(questionId)}}>+新增选项</Button>}
+			<div className = "question-action">
+				{ index !== 0 ? <Button onClick = {() => {moveQuestion(questionnaireId,questionId,'up')}}>上移问题</Button> : null }
+				<Button onClick = {() => {deleteQuestion(questionnaireId,questionId)}}>删除问题</Button>
+				<Button onClick = {() => {reuseQuestion(questionnaireId,questionId)}}>复用问题</Button>
+				{ index !== (length-1) ? <Button onClick = {() => {moveQuestion(questionnaireId,questionId,'down')}}>下移问题</Button> : null }
+			</div>
 		</section>
 	);
 }

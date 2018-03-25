@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { actions as questionnaireActions } from '../../../reducer/questionnaires';
 import { actions as questionActions } from '../../../reducer/questions';
@@ -7,7 +7,7 @@ import Transition from 'react-transition-group/Transition';
 import QuestionList from './QuestionList';
 import { checkDeadline } from '../../../util/util';
 import './edit.css';
-import { DatePicker, Modal } from 'antd';
+import { DatePicker, Modal, Button } from 'antd';
 import moment from 'moment'
 const confirm = Modal.confirm;
 const duration = 300;
@@ -47,21 +47,6 @@ class Edit extends React.Component {
 		const deadline = moment(dateString).format('YYYY-MM-DD');
 		this.props.setDeadline(questionnaireId,deadline);
 	}
-	releaseConfirm(questionnaireId) {
-		const {releaseQuestionnaire,history} = this.props;
-		confirm({
-			title: '确定要发布问卷吗',
-		    okText: '发布',
-		    cancelText: '取消',
-			onOk() {
-			 	releaseQuestionnaire(questionnaireId);
-			 	history.push('/');
-			},
-			onCancel() {
-			 	console.log('Cancel');
-			},
-    	});
-	}
 	checkData(questionnaire,questionsArr){
 		//检测问题个数（1~10个）
 		//检测deadline是否设置正确
@@ -89,6 +74,27 @@ class Edit extends React.Component {
 		}
 		return isDataIllegal;
 	}
+	releaseConfirm(questionnaireId,questionnaire,questionsArr) {
+		const isDataIllegal = this.checkData(questionnaire,questionsArr);
+		if(isDataIllegal){
+			const {releaseQuestionnaire,history} = this.props;
+			confirm({
+				title: '确定要发布问卷吗',
+			    okText: '发布',
+			    cancelText: '取消',
+				onOk() {
+				 	releaseQuestionnaire(questionnaireId);
+				 	history.push('/');
+				},
+				onCancel() {
+				 	console.log('Cancel');
+				},
+	    	});
+		}
+		else {
+			console.log('校验数据失败')
+		}
+	}
 	onSaveQuestionnaire(questionnaire,questionsArr){
 		const isDataIllegal = this.checkData(questionnaire,questionsArr);
 		if(isDataIllegal){
@@ -100,7 +106,10 @@ class Edit extends React.Component {
 			console.log('校验数据失败')
 		}
 	}
-	render(){	
+	render(){
+		if(!this.props.location.state){
+			return <Redirect to = "/"></Redirect>
+		}	
 		const {questionsData, questionnaires, location} = this.props;
 		var 
 			questionnaire,
@@ -129,7 +138,7 @@ class Edit extends React.Component {
 		questionsArr = questionIds.length > 0 ? 
 		questionIds.map((item) => questionsData.byId[item]):
 		[];
-		const deadline = questionnaire.time?questionnaire.time:moment().format('YYYY-MM-DD'); 
+		const deadline = questionnaire.deadline?questionnaire.deadline:moment().format('YYYY-MM-DD'); 
 		const dateFormat = 'YYYY-MM-DD';
 		const { showAddQuestionBtn } = this.state;
 		const questionsDetail = questionsArr.length > 0 ? 
@@ -156,35 +165,39 @@ class Edit extends React.Component {
 						onChange = {(event)=>{this.props.editQuestionnaireTitle(questionnaireId,event.target.value)}}
 						/>
 				{questionsDetail}
-				<section className = "add-question">
-					<div className = "question-type">
-						<Transition in={showAddQuestionBtn} timeout={duration}>
-						    {(state) => (
-						    <div style={{
-						        ...defaultStyle,
-						        ...transitionStyles[state]
-						      }}>
-								<button onClick = {()=>{this.props.addQuestion(questionnaireId,'radio')}}>单选题</button>
-								<button onClick = {()=>{this.props.addQuestion(questionnaireId,'checkbox')}}>多选题</button>
-								<button onClick = {()=>{this.props.addQuestion(questionnaireId,'textarea')}}>文本题</button>
-						    </div>
-						    )}
-						  </Transition>		
-					</div>
-					<button onClick = {this.handleToggle}>+添加问题</button>
-				</section>
+				<div className = "question-type">
+					<Transition in={showAddQuestionBtn} timeout={duration}>
+					    {(state) => (
+					    <div
+					    	className = 'add-question-content' 
+					    	style={{
+					        ...defaultStyle,
+					        ...transitionStyles[state]
+					      }}>
+							<Button onClick = {()=>{this.props.addQuestion(questionnaireId,'radio')}}>单选题</Button>
+							<Button onClick = {()=>{this.props.addQuestion(questionnaireId,'checkbox')}}>多选题</Button>
+							<Button onClick = {()=>{this.props.addQuestion(questionnaireId,'textarea')}}>文本题</Button>
+					    </div>
+					    )}
+					  </Transition>		
+				</div>
+				<div className = "add-question">
+					<Button type = 'primary' onClick = {this.handleToggle}>+添加问题</Button>
+				</div>
 				<footer>
 					<div className = "calendar">
+						<label>请设置截止日期： </label>
 					    <DatePicker
+					    className = 'set-deadline'
 					    defaultValue = {moment(`${deadline}`, dateFormat)}
 					    format={dateFormat}
 					    placeholder = '请选择问卷截止日期'
 					    onChange={(dateString)=>{this.onDateChange(questionnaireId,dateString)}} />
 					</div>
-					<button className = "publish"
-							onClick = {()=>{this.releaseConfirm(questionnaireId)}}>发布问卷</button>
-					<button className = "save"
-							onClick = {()=>this.onSaveQuestionnaire(questionnaire,questionsArr)}>保存问卷</button>
+					<Button type = 'primary' size = "large" className = "publish"
+							onClick = {()=>{this.releaseConfirm(questionnaireId,questionnaire,questionsArr)}}>发布问卷</Button>
+					<Button type = 'primary' size = "large" className = "save"
+							onClick = {()=>this.onSaveQuestionnaire(questionnaire,questionsArr)}>保存问卷</Button>
 				</footer>
 			</div>
 		)

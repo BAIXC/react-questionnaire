@@ -1,13 +1,42 @@
 #edit .edit-title {
+	width: 100%;
 	padding : 10px 0;
 	text-align: center;
 	font-size: 28px;
+	text-indent: 0;
+}
+#edit section {
+	border : 1px solid #000;
+	border-radius : 20px;
+	margin: 10px 10%;
+	padding: 10px 10%;
 }
 #edit input {
+	display: inline-block;
+	padding: 5px 0;
 	border : none;
+	outline: none;
+	text-indent: 1em;
+}
+#edit input:hover {
+	border-radius: 2px;
+	background: #CDE1FF;
 }
 #edit .question-title {
+	width: 100%;
+	font-size: 18px;
+	text-indent: 5px;
+}
+#edit .option-item {
+	border : 1px dotted #999;
+	border-radius: 5px;
+	margin-bottom: 5px;
+	padding-left: 10%;
+}
+#edit .option-text {
 	width: 80%;
+	font-size: 14px;
+	margin-left: 10px;
 }
 #edit .text-question {
 	position: relative;
@@ -16,10 +45,29 @@
 	max-width: 80%;
 }
 #edit .text-question .is-required {
-	position: absolute;
-	right: 20%;
-	top : -24px;
+	padding: 5px 0;
 }
 #edit .text-question .is-required label {
 	margin-left: 5px;
+}
+#edit .add-question {
+	text-align: center;
+}
+#edit .add-question-content {
+	text-align: center;
+	background-color: #F8F8F8;
+}
+#edit .set-deadline {
+	border: 1px solid #aaa;
+	border-radius: 5px;
+	padding : 0 3px;
+}
+@media screen and (max-width : 440px){
+	#edit button {
+		margin: 5%;
+	}
+	#edit section {
+		margin: 0 5% 15px;
+		padding : 10px 5%;
+	}
 }

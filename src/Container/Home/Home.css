@@ -12,7 +12,8 @@
 .ant-table-thead > tr > th:nth-last-child(1){
 	text-indent: 80px;
 }
-.new-qn {
+.new-Qnn {
+	margin-top: 80px;
 	text-align: center;
 }
 button {
