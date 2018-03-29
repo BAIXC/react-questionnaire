@@ -57,9 +57,8 @@ export const actions = {
 		type : types.BATCH_DELETE_QUESTIONNAIRE,
 		payload : { deleteArr }
 	}),
-	createQuestionnaire : () => {
-		let currentId = setData().questionnaires.currentId;
-		const new_id = ++currentId;
+	createQuestionnaire : (qnnCurrentId) => {
+		const new_id = ++qnnCurrentId;
 		const uniqueId = `Qnn${new_id}`;
 		return ({
 			type : types.CREATE_QUESTIONNAIRE,
@@ -70,8 +69,8 @@ export const actions = {
 		});
 	},
 
-	addQuestion : (questionnaireId,questionType) => {
-		let question_currentIdNum = setData().questions.currentId;
+	addQuestion : (questionCurrentId,questionnaireId,questionType) => {
+		let question_currentIdNum = questionCurrentId;
 		const new_idNum = ++question_currentIdNum;
 		const uniqueId = `qn${new_idNum}`;
 		return ({
@@ -91,8 +90,8 @@ export const actions = {
 		}
 	}),
 
-	reuseQuestion : (questionnaireId,questionId) => {
-		let question_currentIdNum = setData().questions.currentId;
+	reuseQuestion : (questionCurrentId,questionnaireId,questionId) => {
+		let question_currentIdNum = questionCurrentId;
 		const new_idNum = ++question_currentIdNum;
 		const uniqueId = `qn${new_idNum}`;
 		return ({
@@ -212,7 +211,6 @@ export const byId = ( state = {}, action ) => {
 				};
 				const new_state = {...state};
 				new_state[uniqueId] = defaultState;
-				updateStorage('byId',new_state);
 				return new_state;
 			}
 			return createQuestionnaire();
@@ -221,6 +219,7 @@ export const byId = ( state = {}, action ) => {
 		case types.ADD_QUESTION : 
 			const addQuestion = () => {
 				const {questionnaireId,question_addId} = action.payload;
+				console.log(questionnaireId);
 				let new_state = cloneObject(state);
 				const questionnaire = new_state[questionnaireId];
 				questionnaire.questions.push(question_addId);
@@ -249,7 +248,7 @@ export const byId = ( state = {}, action ) => {
 				const questionnaire = new_state[questionnaireId];
 				let questions = questionnaire.questions;
 				let questionIndex = questions.indexOf(questionId);
-				questions.splice(questionIndex,0,reuseId);
+				questions.splice(questionIndex+1,0,reuseId);
 				return new_state;
 			};
 			return reuseQuestion();
@@ -262,6 +261,7 @@ export const byId = ( state = {}, action ) => {
 				const questionnaire = new_state[questionnaireId];
 				let questions = questionnaire.questions;
 				let questionIndex = questions.indexOf(questionId);
+				console.log(questionId);
 				let moveNum = null;
 				switch(direction){
 					case 'up':
@@ -328,10 +328,27 @@ export const allIds = ( state = [], action ) => {
 			const createQuestionnaire = () => {
 				const uniqueId = action.payload.uniqueId
 				const new_state = [...state,uniqueId];
-				updateStorage('allIds',new_state);
 				return new_state;
 			}
 			return createQuestionnaire();
+
+		//保存问卷
+		case types.SAVE_QUESTIONNAIRE:
+			const saveQuestionnaire = () => {
+				updateStorage('allIds',state);
+				return state;
+			}
+			return saveQuestionnaire();
+		//发布问卷
+		case types.RELEASE_QUESTIONNAIRE:
+			const releaseQuestionnaire = () => {
+				const {questionnaireId} = action.payload;
+				let new_state = cloneObject(state);
+				new_state[questionnaireId].status = 'publishing';
+				updateStorage('allIds',new_state);
+				return new_state;
+			}
+			return releaseQuestionnaire();
 		default : 
 			return state;
 	}
@@ -341,7 +358,6 @@ export const currentId = ( state = 0, action ) => {
 	switch(action.type){
 		case types.CREATE_QUESTIONNAIRE:
 			const {currentId} = action.payload;
-			updateStorage('currentId',currentId);
 			return currentId;
 		default : 
 			return state;

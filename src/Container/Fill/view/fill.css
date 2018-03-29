@@ -1,0 +1,35 @@
+#fill .fill-title {
+	padding : 10px 0;
+	text-align: center;
+	font-size: 28px;
+}
+#fill section {
+	margin: 0 0 20px 10%;
+}
+#fill .ant-radio-group,
+#fill .ant-checkbox-group {
+	margin-left: 5%;
+}
+#fill .ant-radio-wrapper,
+#fill .ant-checkbox-wrapper {
+	display: block;
+	padding: 10px 0;
+	margin: 0;
+}
+#fill textarea {
+	margin-left: 5%;
+	width: 80%;
+	height : 150px;
+}
+#fill .fill-is-required {
+	margin-right: 5px;
+	font-size: 20px;
+	color : red;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+#fill footer a:hover {
+	text-decoration: none;
+	font-weight: 800;
+}

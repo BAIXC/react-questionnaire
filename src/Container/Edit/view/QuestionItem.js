@@ -4,7 +4,7 @@ import { Button, Checkbox } from 'antd';
 
 const QuestionItem = (args) => {
 	const { 
-			question,questionnaireId,index,length,
+			question,questionnaireId,questionCurrentId,index,length,
 			deleteQuestion,reuseQuestion,moveQuestion,
 			addOption,deleteOption,moveOption,
 			editQuestionTitle,editOption,editRequired
@@ -43,7 +43,7 @@ const QuestionItem = (args) => {
 			<div className = "question-action">
 				{ index !== 0 ? <Button onClick = {() => {moveQuestion(questionnaireId,questionId,'up')}}>上移问题</Button> : null }
 				<Button onClick = {() => {deleteQuestion(questionnaireId,questionId)}}>删除问题</Button>
-				<Button onClick = {() => {reuseQuestion(questionnaireId,questionId)}}>复用问题</Button>
+				<Button onClick = {() => {reuseQuestion(questionCurrentId,questionnaireId,questionId)}}>复用问题</Button>
 				{ index !== (length-1) ? <Button onClick = {() => {moveQuestion(questionnaireId,questionId,'down')}}>下移问题</Button> : null }
 			</div>
 		</section>

@@ -139,7 +139,8 @@ const byId = (state = {}, action) => {
 			const reuseQuestion = () => {
 				const {questionId,reuseId} = action.payload;
 				let questions = cloneObject(state);
-				questions[reuseId] = questions[questionId];
+				questions[reuseId] = cloneObject(questions[questionId]);
+				questions[reuseId].id = reuseId; 
 				return questions;
 			};
 			return reuseQuestion();

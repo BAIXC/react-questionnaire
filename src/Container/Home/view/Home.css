@@ -1,0 +1,21 @@
+#root{
+	height: 100px;
+}
+.Qn-publishing {
+	color : green;
+}
+.action-link {
+	display: table-cell;
+	width: 80px;
+	text-align: center;
+}
+.ant-table-thead > tr > th:nth-last-child(1){
+	text-indent: 80px;
+}
+.new-Qnn {
+	margin-top: 80px;
+	text-align: center;
+}
+button {
+	margin : 20px;
+}

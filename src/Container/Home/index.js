@@ -1,6 +1,4 @@
-// import * as actions from './action';
-// import reducer from './reducer'
-// import view from './Home'
+import view from './container'
 
-// export { actions, reducer, view };
+export { view };
 

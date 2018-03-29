@@ -1,4 +1,4 @@
-import view from './view/container'
+import view from './view/CheckData'
 
 export { view };
 

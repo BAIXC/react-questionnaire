@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import store from '../../Store/store'
 import Header from '../Header/Header.js';
-import Home from '../Home/Home.js';
+import { view as Home } from '../Home/';
 import { view as Edit } from '../Edit/';
 import { view as CheckData } from '../CheckData/';
 import { view as Fill } from '../Fill/';

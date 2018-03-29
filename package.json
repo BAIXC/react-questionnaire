@@ -4,11 +4,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "antd": "^3.2.3",
     "autoprefixer": "7.1.6",
     "babel-core": "6.26.0",
     "babel-eslint": "7.2.3",
     "babel-jest": "20.0.3",
     "babel-loader": "7.1.2",
+    "babel-plugin-import": "^1.6.5",
     "babel-preset-react-app": "^3.1.1",
     "babel-runtime": "6.26.0",
     "case-sensitive-paths-webpack-plugin": "2.1.1",
@@ -40,6 +42,7 @@
     "react-dom": "^16.2.0",
     "react-motion": "^0.5.2",
     "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
     "react-transition-group": "^2.2.1",
     "redux": "^3.7.2",
     "redux-immutable-state-invariant": "^2.1.0",
@@ -58,14 +61,8 @@
     "test": "node scripts/test.js --env=jsdom",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
-
   },
-  "devDependencies": {
-    "antd": "^3.2.3",
-    "babel-plugin-import": "^1.6.5",
-    "react-router": "^4.2.0",
-    "react-router-dom": "^4.2.2"
-  },
+  "devDependencies": {},
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,mjs}"
